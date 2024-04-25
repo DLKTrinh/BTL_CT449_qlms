@@ -7,7 +7,15 @@
                     Đọc Giả
                     <i class="fas fa-address-book"></i>
                 </router-link>
+                
             </li>
+            <li>
+                <router-link :to="{ name: 'nhanvien' }" class="nav-link">
+                    Nhân Viên
+                    <i class="fas fa-address-book"></i>
+                </router-link>
+            </li>
+            
         </div>
     </nav>
 </template>   
