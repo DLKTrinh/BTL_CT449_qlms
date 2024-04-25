@@ -89,7 +89,7 @@ export default {
         async addSach($data) {
             try {
                 await SachService.create($data);
-                message = "Liên hệ được tạo.";
+                message = "Sach da được tạo.";
             } catch (error) {
                 console.log(error);
             }

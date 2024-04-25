@@ -1,7 +1,9 @@
 <template>
     <nav class="navbar navbar-expand navbar-dark bg-dark">
         <a href="/" class="navbar-brand">Ứng dụng Quản Lý Mượn Sách</a>
-        <div class="mr-auto navbar-nav">
+    </nav>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="mr-auto navbar-nav" >
             <li class="nav-item">
                 <router-link :to="{ name: 'docgia' }" class="nav-link">
                     Đọc Giả
@@ -21,7 +23,12 @@
                     <i class="fas fa-address-book"></i>
                 </router-link>
             </li>
-            
+            <li>
+                <router-link :to="{ name: 'nxb' }" class="nav-link">
+                    Nha xuat ban
+                    <i class="fas fa-address-book"></i>
+                </router-link>
+            </li>
         </div>
     </nav>
 </template>   

@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import DocGia from "../views/DocGia.vue";
 import NhanVien from "../views/NhanVien.vue";
 import Sach from "../views/Sach.vue";
+import NXB from "../views/NXB.vue";
 
 const routes = [
     {
@@ -65,6 +66,25 @@ const routes = [
         path: "/sach/add",
         name: "sach.add",
         component: () => import("../views/SachAdd.vue"),
+    },
+
+    {
+        path: "/nxb",
+        name: "nxb",
+        component: NXB,
+    },
+
+    {
+        path: "/nxb/:id",
+        name: "nxb.edit",
+        component: () => import("../views/NXBEdit.vue"),
+        props: true
+    },   
+    
+    {
+        path: "/nxb/add",
+        name: "nxb.add",
+        component: () => import("../views/NXBAdd.vue"),
     },
 ];
 

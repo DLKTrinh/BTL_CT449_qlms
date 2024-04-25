@@ -5,45 +5,45 @@
         </div>
         <div class="mt-3 col-md-6">
             <h4>
-                Nhân viên
+                Nha xuat ban
                 <i class="fas fa-address-book"></i>
             </h4>
 
-            <SachList
-                v-if="filteredSachsCount > 0"
-                :sachs="filteredSachs"
+            <NXBList
+                v-if="filteredNXBsCount > 0"
+                :nxbs="filteredNXBs"
                 v-model:activeIndex="activeIndex"
             />
-            <p v-else>Không có nhân viên nào</p>
+            <p v-else>Không có Nha xuat ban nào</p>
 
             <div class="mt-3 row justify-content-around align-items-center">
                 <button class="btn btn-sm btn-primary" @click="refreshList()">
                     <font-awesome-icon icon="rotate-right" /> Làm mới
                 </button>
 
-                <button class="btn btn-sm btn-success" @click="goToAddSach">
+                <button class="btn btn-sm btn-success" @click="goToAddNXB">
                     <i class="fas fa-plus"></i> Thêm mới
                 </button>
 
                 <button
                     class="btn btn-sm btn-danger"
-                    @click="removeAllSachs"
+                    @click="removeAllNXBs"
                 >
                 <font-awesome-icon icon="trash" /> Xóa tất cả
                 </button>
             </div>
         </div>
         <div class="mt-3 col-md-6">
-            <div v-if="activeSach">
+            <div v-if="activeNXB">
                 <h4>
-                    Chi tiết nhan vien
+                    Chi tiết nha xuat ban
                     <i class="fas fa-address-card"></i>
                 </h4>
-                <SachCard :sach="activeSach" />
+                <NXBCard :nxb="activeNXB" />
                 <router-link
                     :to="{
-                        name: 'sach.edit',
-                        params: { id: activeSach._id },
+                        name: 'nxb.edit',
+                        params: { id: activeNXB._id },
                     }"
                 >
                 <span class="mt-2 badge badge-warning">
@@ -56,21 +56,21 @@
 </template>
 
 <script>
-import SachCard from "../components/SachCard.vue";
+import NXBCard from "../components/NXBCard.vue";
 import InputSearch from "../components/InputSearch.vue";
-import SachList from "../components/SachList.vue";
-import SachService from "../services/sach.service";
+import NXBList from "../components/NXBList.vue";
+import NXBService from "../services/nxb.service";
 
 export default {
     components: {
-        SachCard,
+        NXBCard,
         InputSearch,
-        SachList,
+        NXBList,
     },
 
     data() {
         return {
-            sachs: [],
+            nxbs: [],
             activeIndex: -1,
             searchText: "",
         };
@@ -83,45 +83,45 @@ export default {
     },
 
     computed: {
-        sachStrings() {
-            return this.sachs.map((sach) => {
-                const {name, price, quantity, year, publisher, author} = sach;
-                return [name, price, quantity, year, publisher, author].join("");
+        nxbStrings() {
+            return this.nxbs.map((nxb) => {
+                const {name, address} = nxb;
+                return [name, address].join("");
             });
         },
-        filteredSachs() {
-            if (!this.searchText) return this.sachs;
-            return this.sachs.filter((_sach, index) =>
-                this.sachStrings[index].includes(this.searchText)
+        filteredNXBs() {
+            if (!this.searchText) return this.nxbs;
+            return this.nxbs.filter((_nxb, index) =>
+                this.nxbStrings[index].includes(this.searchText)
             );
         },
-        activeSach() {
+        activeNXB() {
             if (this.activeIndex < 0) return null;
-            return this.filteredSachs[this.activeIndex];
+            return this.filteredNXBs[this.activeIndex];
         },
-        filteredSachsCount() {
-            return this.filteredSachs.length;
+        filteredNXBsCount() {
+            return this.filteredNXBs.length;
         },
     },
 
     methods: {
-        async retrieveSachs() {
+        async retrieveNXBs() {
             try {
-                this.sachs = await SachService.getAll();
+                this.nxbs = await NXBService.getAll();
             } catch (error) {
                 console.log(error);
             }
         },
 
         refreshList() {
-            this.retrieveSachs();
+            this.retrieveNXBs();
             this.activeIndex = -1;
         },
 
-        async removeAllSachs() {
-            if (confirm("Bạn muốn xóa tất cả nhan vien?")) {
+        async removeAllNXBs() {
+            if (confirm("Bạn muốn xóa tất cả nha xuat ban?")) {
                 try {
-                    await SachService.deleteAll();
+                    await NXBService.deleteAll();
                     this.refreshList();
                 } catch (error) {
                     console.log(error);
@@ -129,8 +129,8 @@ export default {
             }
         },
 
-        goToAddSach() {
-            this.$router.push({ name: "sach.add" });
+        goToAddNXB() {
+            this.$router.push({ name: "nxb.add" });
         },
     },
 
