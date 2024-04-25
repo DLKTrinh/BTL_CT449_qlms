@@ -13,23 +13,23 @@ export default {
             {{ sach.name }}
         </div>
         <div class="p-1">
-            <strong>Price:</strong>
+            <strong>Đơn Giá:</strong>
             {{ sach.price }}
         </div>
         <div class="p-1">
-            <strong>So luong:</strong>
+            <strong>Số Lượng:</strong>
             {{ sach.quantity }}
         </div>
         <div class="p-1">
-            <strong>Nam xuat ban:</strong>
+            <strong>Năm Xuất Bản:</strong>
             {{ sach.year }}
         </div>
         <div class="p-1">
-            <strong>Nha xuat ban:</strong>
+            <strong>Nhà Xuất Bản:</strong>
             {{ sach.publisher }}
         </div>
         <div class="p-1">
-            <strong>Tac gia:</strong>
+            <strong>Tác Giả:</strong>
             {{ sach.author }}
         </div>
     </div>

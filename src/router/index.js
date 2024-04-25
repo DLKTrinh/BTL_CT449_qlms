@@ -3,8 +3,15 @@ import DocGia from "../views/DocGia.vue";
 import NhanVien from "../views/NhanVien.vue";
 import Sach from "../views/Sach.vue";
 import NXB from "../views/NXB.vue";
+import MuonSach from "../views/MuonSach.vue"
 
 const routes = [
+    {
+        path: "/",
+        name: "quanlymuonsach",
+        component: () => import("../views/QuanLyMuonSach.vue"),
+    },
+
     {
         path: "/:pathMatch(.*)*",
         name: "notfound",
@@ -86,6 +93,25 @@ const routes = [
         name: "nxb.add",
         component: () => import("../views/NXBAdd.vue"),
     },
+    
+    {
+        path: "/muonsach",
+        name: "muonsach",
+        component: MuonSach,
+    },
+
+    {
+        path: "/muonsach/:id",
+        name: "muonsach.edit",
+        component: () => import("../views/MuonSachEdit.vue"),
+        props: true
+    },
+
+    {
+        path: "/muonsach/add",
+        name: "muonsach.add",
+        component: () => import("../views/MuonSachAdd.vue"),
+    }, 
 ];
 
 const router = createRouter({

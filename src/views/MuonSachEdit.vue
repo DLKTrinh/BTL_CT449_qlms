@@ -1,36 +1,36 @@
 <template>
-    <div v-if="nxb" class="page">
-        <h4>Hiệu Chỉnh Thông Tin Nhà Xuất Bản</h4>
-        <NXBForm
-            :nxb="nxb"
-            @submit:nxb="updateNXB"
-            @delete:nxb="deleteNXB"
+    <div v-if="muonsach" class="page">
+        <h4>Hiệu chỉnh thon tin nhan vien</h4>
+        <MuonSachForm
+            :muonsach="muonsach"
+            @submit:muonsach="updateMuonSach"
+            @delete:muonsach="deleteMuonSach"
         />
         <p>{{ message }}</p>
     </div>
 </template>/
 
 <script>
-    import NXBForm from "../components/NXBForm.vue";
-    import NXBService from "../services/nxb.service";
+    import MuonSachForm from "../components/MuonSachForm.vue";
+    import MuonSachService from "../services/muonsach.service";
 
     export default {
         components: {
-            NXBForm,
+            MuonSachForm,
         },
         props: {
             id: { type: String, required: true },
         },
         data() {
             return {
-                nxb: null, 
+                muonsach: null, 
                 message: "",
             };
         },
         methods: {
-            async getNXB(id) {
+            async getMuonSach(id) {
                 try {
-                    this.nxb = await NXBService.get(id);
+                    this.muonsach = await MuonSachService.get(id);
                 } catch (error) {
                     console.log(error);
                     this.$router.push({
@@ -44,20 +44,20 @@
                 }
             },
 
-            async updateNXB(data) {
+            async updateMuonSach(data) {
                 try {
-                    await NXBService.update(this.nxb._id, data);
-                    this.message = "nha xuat ban được cập nhật thành công.";
+                    await MuonSachService.update(this.muonsach._id, data);
+                    this.message = "Thẻ mượn được cập nhật thành công.";
                 } catch (error) {
                     console.log(error);
                 }
             },
 
-            async deleteNXB() {
-                if (confirm("Bạn muốn xóa nhà xuất bản này?")) {
+            async deleteMuonSach() {
+                if (confirm("Bạn muốn xóa thẻ mượn này?")) {
                     try {
-                        await NXBService.delete(this.nxb._id);
-                        this.$router.push({ name: "nxb" });
+                        await MuonSachService.delete(this.muonsach._id);
+                        this.$router.push({ name: "muonsach" });
                     } catch (error) {
                         console.log(error);
                     }
@@ -65,7 +65,7 @@
             },
         },
         created() {
-            this.getNXB(this.id);
+            this.getMuonSach(this.id);
             this.message = "";
         },
     };

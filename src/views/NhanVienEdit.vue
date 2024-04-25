@@ -1,6 +1,6 @@
 <template>
     <div v-if="nhanvien" class="page">
-        <h4>Hiệu chỉnh thon tin nhan vien</h4>
+        <h4>Hiệu Chỉnh Thông Tin Nhân Viên</h4>
         <NhanVienForm
             :nhanvien="nhanvien"
             @submit:nhanvien="updateNhanVien"
@@ -47,14 +47,14 @@
             async updateNhanVien(data) {
                 try {
                     await NhanVienService.update(this.nhanvien._id, data);
-                    this.message = "Liên hệ được cập nhật thành công.";
+                    this.message = "Nhân viên được cập nhật thành công.";
                 } catch (error) {
                     console.log(error);
                 }
             },
 
             async deleteNhanVien() {
-                if (confirm("Bạn muốn xóa Liên hệ này?")) {
+                if (confirm("Bạn muốn xóa nhân viên này?")) {
                     try {
                         await NhanVienService.delete(this.nhanvien._id);
                         this.$router.push({ name: "nhanvien" });

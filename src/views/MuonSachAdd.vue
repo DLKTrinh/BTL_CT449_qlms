@@ -1,11 +1,11 @@
 <template>
     <div class="page">
-        <h4>Thêm Nhà Xuất Bản</h4>
+        <h4>Thêm Thẻ Mượn</h4>
         <Form
-            @submit.prevent="addNXB($data)"
+            @submit.prevent="addMuonSach($data)"
         >
         <div class="form-group">
-            <label for="name">Tên</label>
+            <label for="name">Tên quyển sách</label>
             <input
                 name="name"
                 type="text"
@@ -15,41 +15,66 @@
             <ErrorMessage name="name" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="address">Địa chỉ</label>
+            <label for="reader">Tên người mượn</label>
             <input
-                name="address"
+                name="reader"
                 type="text"
                 class="form-control"
-                v-model="address"
+                v-model="reader"
             />
-            <ErrorMessage name="address" class="error-feedback" />
+            <ErrorMessage name="reader" class="error-feedback" />
         </div>
+        <div class="form-group">
+                <label for="borrow">Ngày mượn</label>
+                <input
+                    name="borrow"
+                    type="date"
+                    class="form-control"
+                    v-model="borrow"
+                />
+                <ErrorMessage name="borrow" class="error-feedback" />
+        </div>
+        <div class="form-group">
+                <label for="returns">Ngày trả</label>
+                <input
+                    name="returns"
+                    type="date"
+                    class="form-control"
+                    v-model="returns"
+                />
+                <ErrorMessage name="returns" class="error-feedback" />
+            </div>
+        
+        <div class="form-group">
             <div class="form-group submit">
                     <button class="btn btn-primary"><font-awesome-icon icon="floppy-disk" />Lưu</button>
             </div>
+        </div>
         </Form>
     </div>
 </template>
 
 <script>
-import NXBService from "../services/nxb.service";
+import MuonSachService from "../services/muonsach.service";
 
 export default {
     data() {
         return{
             name: '',
-            address: '',
+            reader: '',
+            borrow: '',
+            returns: '',
         };
     },
     methods: {
-        async addNXB($data) {
+        async addMuonSach($data) {
             try {
-                await NXBService.create($data);
-                message = "Nhà xuất bản đã được tạo.";
+                await MuonSachService.create($data);
+                message = "Thẻ mượn sách đã được tạo.";
             } catch (error) {
                 console.log(error);
             }
-            this.$router.push({ name: "nxb" });
+            this.$router.push({ name: "muonsach" });
         },
     },
 };

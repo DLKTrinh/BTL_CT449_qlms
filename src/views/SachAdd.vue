@@ -1,6 +1,6 @@
 <template>
     <div class="page">
-        <h4>Thêm Sach</h4>
+        <h4>Thêm Quyển Sách Mới Vào Thư Viện</h4>
         <Form
             @submit.prevent="addSach($data)"
         >
@@ -15,7 +15,7 @@
             <ErrorMessage name="name" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="price">Gia</label>
+            <label for="price">Đơn Giá</label>
             <input
                 name="price"
                 type="number"
@@ -25,7 +25,7 @@
             <ErrorMessage name="price" class="error-feedback" />
         </div>
         <div class="form-group">
-                <label for="quantity">So luong</label>
+                <label for="quantity">Số lượng </label>
                 <input
                     name="quantity"
                     type="number"
@@ -35,7 +35,7 @@
                 <ErrorMessage name="quantity" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="year">Nam xuat ban</label>
+            <label for="year">Năm Xuất Bản</label>
             <input
                 name="year"
                 type="number"
@@ -45,7 +45,7 @@
             <ErrorMessage name="year" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="publisher">Nha xuat ban</label>
+            <label for="publisher">Nhà Xuất Bản</label>
             <input
                 name="publisher"
                 type="text"
@@ -55,7 +55,7 @@
             <ErrorMessage name="publisher" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="author">Tac gia</label>
+            <label for="author">Tác Giả </label>
             <input
                 name="author"
                 type="text"
@@ -89,7 +89,7 @@ export default {
         async addSach($data) {
             try {
                 await SachService.create($data);
-                message = "Sach da được tạo.";
+                message = "Quyển sách mới đã được tạo.";
             } catch (error) {
                 console.log(error);
             }

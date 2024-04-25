@@ -5,43 +5,43 @@
         </div>
         <div class="mt-3 col-md-6">
             <h4>
-                Đọc giả
+                Danh Sách Mượn
             </h4>
 
-            <DocGiaList
-                v-if="filteredDocGiasCount > 0"
-                :docgias="filteredDocGias"
+            <MuonSachList
+                v-if="filteredMuonSachsCount > 0"
+                :muonsachs="filteredMuonSachs"
                 v-model:activeIndex="activeIndex"
             />
-            <p v-else>Không có đọc giả nào</p>
+            <p v-else>Không có quyển sách nào đang được mượn</p>
 
             <div class="mt-3 row justify-content-around align-items-center">
                 <button class="btn btn-sm btn-primary" @click="refreshList()">
                     <font-awesome-icon icon="rotate-right" /> Làm mới
                 </button>
 
-                <button class="btn btn-sm btn-success" @click="goToAddDocGia">
+                <button class="btn btn-sm btn-success" @click="goToAddMuonSach">
                     <i class="fas fa-plus"></i> Thêm mới
                 </button>
 
                 <button
                     class="btn btn-sm btn-danger"
-                    @click="removeAllDocGias"
+                    @click="removeAllMuonSachs"
                 >
                 <font-awesome-icon icon="trash" /> Xóa tất cả
                 </button>
             </div>
         </div>
         <div class="mt-3 col-md-6">
-            <div v-if="activeDocGia">
+            <div v-if="activeMuonSach">
                 <h4>
-                    Thông Tin Đọc Giả
+                    Thẻ Mượn
                 </h4>
-                <DocGiaCard :docgia="activeDocGia" />
+                <MuonSachCard :muonsach="activeMuonSach" />
                 <router-link
                     :to="{
-                        name: 'docgia.edit',
-                        params: { id: activeDocGia._id },
+                        name: 'muonsach.edit',
+                        params: { id: activeMuonSach._id },
                     }"
                 >
                 <span class="mt-2 badge badge-warning">
@@ -54,21 +54,21 @@
 </template>
 
 <script>
-import DocGiaCard from "../components/DocGiaCard.vue";
+import MuonSachCard from "../components/MuonSachCard.vue";
 import InputSearch from "../components/InputSearch.vue";
-import DocGiaList from "../components/DocGiaList.vue";
-import DocGiaService from "../services/docgia.service";
+import MuonSachList from "../components/MuonSachList.vue";
+import MuonSachService from "../services/muonsach.service";
 
 export default {
     components: {
-        DocGiaCard,
+        MuonSachCard,
         InputSearch,
-        DocGiaList,
+        MuonSachList,
     },
 
     data() {
         return {
-            docgias: [],
+            muonsachs: [],
             activeIndex: -1,
             searchText: "",
         };
@@ -81,45 +81,45 @@ export default {
     },
 
     computed: {
-        docgiaStrings() {
-            return this.docgias.map((docgia) => {
-                const { surname, name, birthday, sex, address, phone } = docgia;
-                return [surname, name, birthday, sex, address, phone].join("");
+        muonsachStrings() {
+            return this.muonsachs.map((muonsach) => {
+                const {name, reader, borrow, returns,} = muonsach;
+                return [name, reader, borrow, returns].join("");
             });
         },
-        filteredDocGias() {
-            if (!this.searchText) return this.docgias;
-            return this.docgias.filter((_docgia, index) =>
-                this.docgiaStrings[index].includes(this.searchText)
+        filteredMuonSachs() {
+            if (!this.searchText) return this.muonsachs;
+            return this.muonsachs.filter((_muonsach, index) =>
+                this.muonsachStrings[index].includes(this.searchText)
             );
         },
-        activeDocGia() {
+        activeMuonSach() {
             if (this.activeIndex < 0) return null;
-            return this.filteredDocGias[this.activeIndex];
+            return this.filteredMuonSachs[this.activeIndex];
         },
-        filteredDocGiasCount() {
-            return this.filteredDocGias.length;
+        filteredMuonSachsCount() {
+            return this.filteredMuonSachs.length;
         },
     },
 
     methods: {
-        async retrieveDocGias() {
+        async retrieveMuonSachs() {
             try {
-                this.docgias = await DocGiaService.getAll();
+                this.muonsachs = await MuonSachService.getAll();
             } catch (error) {
                 console.log(error);
             }
         },
 
         refreshList() {
-            this.retrieveDocGias();
+            this.retrieveMuonSachs();
             this.activeIndex = -1;
         },
 
-        async removeAllDocGias() {
-            if (confirm("Bạn muốn xóa tất cả doc gia")) {
+        async removeAllMuonSachs() {
+            if (confirm("Bạn muốn xóa tất cả nha xuat ban?")) {
                 try {
-                    await DocGiaService.deleteAll();
+                    await MuonSachService.deleteAll();
                     this.refreshList();
                 } catch (error) {
                     console.log(error);
@@ -127,8 +127,8 @@ export default {
             }
         },
 
-        goToAddDocGia() {
-            this.$router.push({ name: "docgia.add" });
+        goToAddMuonSach() {
+            this.$router.push({ name: "muonsach.add" });
         },
     },
 

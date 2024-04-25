@@ -7,26 +7,27 @@
             <li class="nav-item">
                 <router-link :to="{ name: 'docgia' }" class="nav-link">
                     Đọc Giả
-                    <i class="fas fa-address-book"></i>
                 </router-link>
                 
             </li>
             <li>
                 <router-link :to="{ name: 'nhanvien' }" class="nav-link">
                     Nhân Viên
-                    <i class="fas fa-address-book"></i>
                 </router-link>
             </li>
             <li>
                 <router-link :to="{ name: 'sach' }" class="nav-link">
-                    Sach
-                    <i class="fas fa-address-book"></i>
+                    Sách
                 </router-link>
             </li>
             <li>
                 <router-link :to="{ name: 'nxb' }" class="nav-link">
-                    Nha xuat ban
-                    <i class="fas fa-address-book"></i>
+                    Nhà Xuất Bản
+                </router-link>
+            </li>
+            <li>
+                <router-link :to="{ name: 'muonsach' }" class="nav-link">
+                    Danh Sách Mượn
                 </router-link>
             </li>
         </div>

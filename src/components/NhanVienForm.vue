@@ -14,7 +14,7 @@
             <ErrorMessage name="name" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="position">Tên</label>
+            <label for="position">Vị Trí</label>
             <Field
                 name="position"
                 type="text"
@@ -24,7 +24,7 @@
             <ErrorMessage name="position" class="error-feedback" />
         </div>
         <div class="form-group">
-                <label for="password">Ngày sinh</label>
+                <label for="password">Ngày Sinh</label>
                 <Field
                     name="password"
                     type="text"
@@ -34,7 +34,7 @@
                 <ErrorMessage name="password" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="address">Địa chỉ</label>
+            <label for="address">Địa Chỉ</label>
             <Field
                 name="address"
                 type="text"
@@ -44,7 +44,7 @@
             <ErrorMessage name="address" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="phone">Điện thoại</label>
+            <label for="phone">Điện Thoại</label>
             <Field
                 name="phone"
                 type="tel"

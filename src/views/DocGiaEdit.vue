@@ -1,6 +1,6 @@
 <template>
     <div v-if="docgia" class="page">
-        <h4>Hiệu chỉnh doc gia</h4>
+        <h4>Hiệu Chỉnh Đọc Giả</h4>
         <DocGiaForm
             :docgia="docgia"
             @submit:docgia="updateDocGia"
@@ -47,14 +47,14 @@
             async updateDocGia(data) {
                 try {
                     await DocGiaService.update(this.docgia._id, data);
-                    this.message = "doc gia được cập nhật thành công.";
+                    this.message = "Đọc giả được cập nhật thành công.";
                 } catch (error) {
                     console.log(error);
                 }
             },
 
             async deleteDocGia() {
-                if (confirm("Bạn muốn xóa doc gia này?")) {
+                if (confirm("Bạn muốn xóa đọc giả này?")) {
                     try {
                         await DocGiaService.delete(this.docgia._id);
                         this.$router.push({ name: "docgia" });

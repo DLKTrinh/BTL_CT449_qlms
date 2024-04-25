@@ -14,7 +14,7 @@
             <ErrorMessage name="name" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="price">Gia</label>
+            <label for="price">Đơn Giá</label>
             <Field
                 name="price"
                 type="number"
@@ -24,7 +24,7 @@
             <ErrorMessage name="price" class="error-feedback" />
         </div>
         <div class="form-group">
-                <label for="quantity">So luong</label>
+                <label for="quantity">Số Lượng</label>
                 <Field
                     name="quantity"
                     type="number"
@@ -34,7 +34,7 @@
                 <ErrorMessage name="quantity" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="year">Nam xuat ban</label>
+            <label for="year">Năm Xuất Bản</label>
             <Field
                 name="year"
                 type="number"
@@ -44,7 +44,7 @@
             <ErrorMessage name="year" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="publisher">Nha xuat ban</label>
+            <label for="publisher">Nhà Xuất Bản</label>
             <Field
                 name="publisher"
                 type="text"
@@ -54,7 +54,7 @@
             <ErrorMessage name="publisher" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="author">Tac gia</label>
+            <label for="author">Tác Giả</label>
             <Field
                 name="author"
                 type="text"

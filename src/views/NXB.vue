@@ -5,8 +5,7 @@
         </div>
         <div class="mt-3 col-md-6">
             <h4>
-                Nha xuat ban
-                <i class="fas fa-address-book"></i>
+                Nhà Xuất Bản
             </h4>
 
             <NXBList
@@ -14,7 +13,7 @@
                 :nxbs="filteredNXBs"
                 v-model:activeIndex="activeIndex"
             />
-            <p v-else>Không có Nha xuat ban nào</p>
+            <p v-else>Không có nhà xuất bản nào</p>
 
             <div class="mt-3 row justify-content-around align-items-center">
                 <button class="btn btn-sm btn-primary" @click="refreshList()">
@@ -36,8 +35,7 @@
         <div class="mt-3 col-md-6">
             <div v-if="activeNXB">
                 <h4>
-                    Chi tiết nha xuat ban
-                    <i class="fas fa-address-card"></i>
+                    Chi Tiết Nhà Xuất Bản
                 </h4>
                 <NXBCard :nxb="activeNXB" />
                 <router-link
@@ -119,7 +117,7 @@ export default {
         },
 
         async removeAllNXBs() {
-            if (confirm("Bạn muốn xóa tất cả nha xuat ban?")) {
+            if (confirm("Bạn muốn xóa tất cả nhà xuất bản?")) {
                 try {
                     await NXBService.deleteAll();
                     this.refreshList();

@@ -5,8 +5,7 @@
         </div>
         <div class="mt-3 col-md-6">
             <h4>
-                Nhân viên
-                <i class="fas fa-address-book"></i>
+                Sách
             </h4>
 
             <SachList
@@ -14,7 +13,7 @@
                 :sachs="filteredSachs"
                 v-model:activeIndex="activeIndex"
             />
-            <p v-else>Không có nhân viên nào</p>
+            <p v-else>Thư Viện Rỗng</p>
 
             <div class="mt-3 row justify-content-around align-items-center">
                 <button class="btn btn-sm btn-primary" @click="refreshList()">
@@ -36,8 +35,7 @@
         <div class="mt-3 col-md-6">
             <div v-if="activeSach">
                 <h4>
-                    Chi tiết nhan vien
-                    <i class="fas fa-address-card"></i>
+                    Thông tin quyển sách
                 </h4>
                 <SachCard :sach="activeSach" />
                 <router-link
@@ -119,7 +117,7 @@ export default {
         },
 
         async removeAllSachs() {
-            if (confirm("Bạn muốn xóa tất cả nhan vien?")) {
+            if (confirm("Bạn muốn xóa tất cả quyển sách?")) {
                 try {
                     await SachService.deleteAll();
                     this.refreshList();

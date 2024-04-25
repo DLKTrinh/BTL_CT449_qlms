@@ -1,6 +1,6 @@
 <template>
     <div v-if="sach" class="page">
-        <h4>Hiệu chỉnh thon tin sach</h4>
+        <h4>Hiệu Chỉnh Thông Tin Sách</h4>
         <SachForm
             :sach="sach"
             @submit:sach="updateSach"
@@ -47,14 +47,14 @@
             async updateSach(data) {
                 try {
                     await SachService.update(this.sach._id, data);
-                    this.message = "sach được cập nhật thành công.";
+                    this.message = "Thông tin của sách đã được cập nhật thành công.";
                 } catch (error) {
                     console.log(error);
                 }
             },
 
             async deleteSach() {
-                if (confirm("Bạn muốn xóa sach này?")) {
+                if (confirm("Bạn muốn xóa quyển sách này?")) {
                     try {
                         await SachService.delete(this.sach._id);
                         this.$router.push({ name: "sach" });

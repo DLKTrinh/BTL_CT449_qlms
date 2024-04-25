@@ -13,7 +13,7 @@ export default {
             {{ nxb.name }}
         </div>
         <div class="p-1">
-            <strong>Dia chi:</strong>
+            <strong>Địa Chỉ:</strong>
             {{ nxb.address }}
         </div>
     </div>
