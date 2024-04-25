@@ -1,36 +1,36 @@
 <template>
-    <div v-if="docgia" class="page">
-        <h4>Hiệu chỉnh doc gia</h4>
-        <DocGiaForm
-            :docgia="docgia"
-            @submit:docgia="updateDocGia"
-            @delete:docgia="deleteDocGia"
+    <div v-if="sach" class="page">
+        <h4>Hiệu chỉnh thon tin sach</h4>
+        <SachForm
+            :sach="sach"
+            @submit:sach="updateSach"
+            @delete:sach="deleteSach"
         />
         <p>{{ message }}</p>
     </div>
 </template>/
 
 <script>
-    import DocGiaForm from "../components/DocGiaForm.vue";
-    import DocGiaService from "../services/docgia.service";
+    import SachForm from "../components/SachForm.vue";
+    import SachService from "../services/sach.service";
 
     export default {
         components: {
-            DocGiaForm,
+            SachForm,
         },
         props: {
             id: { type: String, required: true },
         },
         data() {
             return {
-                docgia: null,
+                sach: null, 
                 message: "",
             };
         },
         methods: {
-            async getDocGia(id) {
+            async getSach(id) {
                 try {
-                    this.docgia = await DocGiaService.get(id);
+                    this.sach = await SachService.get(id);
                 } catch (error) {
                     console.log(error);
                     this.$router.push({
@@ -44,20 +44,20 @@
                 }
             },
 
-            async updateDocGia(data) {
+            async updateSach(data) {
                 try {
-                    await DocGiaService.update(this.docgia._id, data);
-                    this.message = "doc gia được cập nhật thành công.";
+                    await SachService.update(this.sach._id, data);
+                    this.message = "sach được cập nhật thành công.";
                 } catch (error) {
                     console.log(error);
                 }
             },
 
-            async deleteDocGia() {
-                if (confirm("Bạn muốn xóa doc gia này?")) {
+            async deleteSach() {
+                if (confirm("Bạn muốn xóa sach này?")) {
                     try {
-                        await DocGiaService.delete(this.docgia._id);
-                        this.$router.push({ name: "docgia" });
+                        await SachService.delete(this.sach._id);
+                        this.$router.push({ name: "sach" });
                     } catch (error) {
                         console.log(error);
                     }
@@ -65,7 +65,7 @@
             },
         },
         created() {
-            this.getDocGia(this.id);
+            this.getSach(this.id);
             this.message = "";
         },
     };

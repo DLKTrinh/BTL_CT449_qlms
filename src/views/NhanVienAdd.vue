@@ -1,6 +1,6 @@
 <template>
     <div class="page">
-        <h4>Thêm liên hệ</h4>
+        <h4>Thêm thong tin nhan vien</h4>
         <Form
             @submit.prevent="addNhanVien($data)"
         >
@@ -81,7 +81,7 @@ export default {
         async addNhanVien($data) {
             try {
                 await NhanVienService.create($data);
-                message = "Liên hệ được tạo.";
+                message = "nhan vien được tạo.";
             } catch (error) {
                 console.log(error);
             }

@@ -15,6 +15,12 @@
                     <i class="fas fa-address-book"></i>
                 </router-link>
             </li>
+            <li>
+                <router-link :to="{ name: 'sach' }" class="nav-link">
+                    Sach
+                    <i class="fas fa-address-book"></i>
+                </router-link>
+            </li>
             
         </div>
     </nav>

@@ -1,6 +1,6 @@
 <template>
     <div class="page">
-        <h4>Thêm liên hệ</h4>
+        <h4>Thêm doc gia</h4>
         <Form
             @submit.prevent="addDocGia($data)"
         >

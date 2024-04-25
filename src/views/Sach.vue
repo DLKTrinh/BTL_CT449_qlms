@@ -5,45 +5,45 @@
         </div>
         <div class="mt-3 col-md-6">
             <h4>
-                Đọc giả
+                Nhân viên
                 <i class="fas fa-address-book"></i>
             </h4>
 
-            <DocGiaList
-                v-if="filteredDocGiasCount > 0"
-                :docgias="filteredDocGias"
+            <SachList
+                v-if="filteredSachsCount > 0"
+                :sachs="filteredSachs"
                 v-model:activeIndex="activeIndex"
             />
-            <p v-else>Không có đọc giả nào</p>
+            <p v-else>Không có nhân viên nào</p>
 
             <div class="mt-3 row justify-content-around align-items-center">
                 <button class="btn btn-sm btn-primary" @click="refreshList()">
                     <font-awesome-icon icon="rotate-right" /> Làm mới
                 </button>
 
-                <button class="btn btn-sm btn-success" @click="goToAddDocGia">
+                <button class="btn btn-sm btn-success" @click="goToAddSach">
                     <i class="fas fa-plus"></i> Thêm mới
                 </button>
 
                 <button
                     class="btn btn-sm btn-danger"
-                    @click="removeAllDocGias"
+                    @click="removeAllSachs"
                 >
                 <font-awesome-icon icon="trash" /> Xóa tất cả
                 </button>
             </div>
         </div>
         <div class="mt-3 col-md-6">
-            <div v-if="activeDocGia">
+            <div v-if="activeSach">
                 <h4>
-                    Chi tiết Liên hệ
+                    Chi tiết nhan vien
                     <i class="fas fa-address-card"></i>
                 </h4>
-                <DocGiaCard :docgia="activeDocGia" />
+                <SachCard :sach="activeSach" />
                 <router-link
                     :to="{
-                        name: 'docgia.edit',
-                        params: { id: activeDocGia._id },
+                        name: 'sach.edit',
+                        params: { id: activeSach._id },
                     }"
                 >
                 <span class="mt-2 badge badge-warning">
@@ -56,21 +56,21 @@
 </template>
 
 <script>
-import DocGiaCard from "../components/DocGiaCard.vue";
+import SachCard from "../components/SachCard.vue";
 import InputSearch from "../components/InputSearch.vue";
-import DocGiaList from "../components/DocGiaList.vue";
-import DocGiaService from "../services/docgia.service";
+import SachList from "../components/SachList.vue";
+import SachService from "../services/sach.service";
 
 export default {
     components: {
-        DocGiaCard,
+        SachCard,
         InputSearch,
-        DocGiaList,
+        SachList,
     },
 
     data() {
         return {
-            docgias: [],
+            sachs: [],
             activeIndex: -1,
             searchText: "",
         };
@@ -83,45 +83,45 @@ export default {
     },
 
     computed: {
-        docgiaStrings() {
-            return this.docgias.map((docgia) => {
-                const { surname, name, birthday, sex, address, phone } = docgia;
-                return [surname, name, birthday, sex, address, phone].join("");
+        sachStrings() {
+            return this.sachs.map((sach) => {
+                const { name, password, position, address, phone } = sach;
+                return [name, password, position, address, phone ].join("");
             });
         },
-        filteredDocGias() {
-            if (!this.searchText) return this.docgias;
-            return this.docgias.filter((_docgia, index) =>
-                this.docgiaStrings[index].includes(this.searchText)
+        filteredSachs() {
+            if (!this.searchText) return this.sachs;
+            return this.sachs.filter((_sach, index) =>
+                this.sachStrings[index].includes(this.searchText)
             );
         },
-        activeDocGia() {
+        activeSach() {
             if (this.activeIndex < 0) return null;
-            return this.filteredDocGias[this.activeIndex];
+            return this.filteredSachs[this.activeIndex];
         },
-        filteredDocGiasCount() {
-            return this.filteredDocGias.length;
+        filteredSachsCount() {
+            return this.filteredSachs.length;
         },
     },
 
     methods: {
-        async retrieveDocGias() {
+        async retrieveSachs() {
             try {
-                this.docgias = await DocGiaService.getAll();
+                this.sachs = await SachService.getAll();
             } catch (error) {
                 console.log(error);
             }
         },
 
         refreshList() {
-            this.retrieveDocGias();
+            this.retrieveSachs();
             this.activeIndex = -1;
         },
 
-        async removeAllDocGias() {
-            if (confirm("Bạn muốn xóa tất cả doc gia")) {
+        async removeAllSachs() {
+            if (confirm("Bạn muốn xóa tất cả nhan vien?")) {
                 try {
-                    await DocGiaService.deleteAll();
+                    await SachService.deleteAll();
                     this.refreshList();
                 } catch (error) {
                     console.log(error);
@@ -129,8 +129,8 @@ export default {
             }
         },
 
-        goToAddDocGia() {
-            this.$router.push({ name: "docgia.add" });
+        goToAddSach() {
+            this.$router.push({ name: "sach.add" });
         },
     },
 

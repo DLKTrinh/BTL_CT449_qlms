@@ -1,6 +1,6 @@
 <template>
     <div v-if="nhanvien" class="page">
-        <h4>Hiệu chỉnh Liên hệ</h4>
+        <h4>Hiệu chỉnh thon tin nhan vien</h4>
         <NhanVienForm
             :nhanvien="nhanvien"
             @submit:nhanvien="updateNhanVien"
