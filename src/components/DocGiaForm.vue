@@ -3,6 +3,16 @@
         @submit="submitDocGia"
         :validation-schema="docgiaFormSchema"
     >
+    <div class="form-group">
+        <label for="surname">Họ lót</label>
+            <Field
+                name="surname"
+                type="text"
+                class="form-control"
+                v-model="docgiaLocal.surname"
+            />
+            <ErrorMessage name="surname" class="error-feedback" />
+        </div>
         <div class="form-group">
             <label for="name">Tên</label>
             <Field
@@ -14,15 +24,24 @@
             <ErrorMessage name="name" class="error-feedback" />
         </div>
         <div class="form-group">
-            <label for="email">E-mail</label>
-            <Field
-                name="email"
-                type="email"
-                class="form-control"
-                v-model="docgiaLocal.email"
-            />
-            <ErrorMessage name="email" class="error-feedback" />
-        </div>
+                <label for="birthday">Ngày sinh</label>
+                <Field
+                    name="birthday"
+                    type="date"
+                    class="form-control"
+                    v-model="docgiaLocal.birthday"
+                />
+                <ErrorMessage name="birthday" class="error-feedback" />
+            </div>
+            <div class="form-group">
+                <label for="sex">Giới tính</label>
+                    <input value="Nam" type="radio" v-model="docgiaLocal.sex" style="margin: 0px 10px;"> 
+                    <lable style="margin-right: 30px;">Nam</lable>
+                    <input value="Nữ" type="radio" v-model="docgiaLocal.sex" style="margin: 0px 10px;"> 
+                    <lable style="margin-right: 30px;">Nữ</lable>
+                    <input value="Khác" type="radio" v-model="docgiaLocal.sex" style="margin: 0px 10px;"> 
+                    <lable>Khác</lable>
+            </div>
         <div class="form-group">
             <label for="address">Địa chỉ</label>
             <Field
@@ -42,17 +61,6 @@
                 v-model="docgiaLocal.phone"
             />
             <ErrorMessage name="phone" class="error-feedback" />
-        </div>
-        <div class="form-group form-check">
-            <input
-                name="favorite"
-                type="checkbox"
-                class="form-check-input"
-                v-model="docgiaLocal.favorite"
-            />
-            <label for="favorite" class="form-check-label">
-                <strong>Liên hệ yêu thích</strong>
-            </label>
         </div>
         <div class="form-group">
             <button class="btn btn-primary">Lưu</button>
@@ -84,15 +92,20 @@ export default {
     },
     data() {
         const docgiaFormSchema = yup.object().shape({
+            surname: yup
+                .string()
+                .required("Họ lót phải có giá trị.")
+                .min(2, "Tên phải ít nhất 2 ký tự.")
+                .max(50, "Tên có nhiều nhất 50 ký tự."),
             name: yup
                 .string()
                 .required("Tên phải có giá trị.")
                 .min(2, "Tên phải ít nhất 2 ký tự.")
                 .max(50, "Tên có nhiều nhất 50 ký tự."),
-            email: yup
-                .string()
-                .email("E-mail không đúng.")
-                .max(50, "E-mail tối đa 50 ký tự."),
+            birthday: yup
+                .date()
+                .max(new Date(), "Vui lòng chọn ngày hợp lệ")
+                .min("01/01/1900","Vui lòng chọn ngày hợp lệ"),
             address: yup.string().max(100, "Địa chỉ tối đa 100 ký tự."),
             phone: yup
                 .string()
@@ -110,9 +123,11 @@ export default {
     methods: {
         submitDocGia() {
             this.$emit("submit:docgia", this.docgiaLocal);
+            this.$router.push({ name: "docgia" });
         },
         deleteDocGia() {
             this.$emit("delete:docgia", this.docgiaLocal.id);
+            this.$router.push({ name: "docgia" });
         },
     },
 };

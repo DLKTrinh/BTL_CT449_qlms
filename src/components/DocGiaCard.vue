@@ -9,12 +9,20 @@ export default {
 <template>
     <div>
         <div class="p-1">
+            <strong>Họ lót:</strong>
+            {{ docgia.surname }}
+        </div>
+        <div class="p-1">
             <strong>Tên:</strong>
             {{ docgia.name }}
         </div>
         <div class="p-1">
-            <strong>E-mail:</strong>
-            {{ docgia.email }}
+            <strong>Ngày sinh:</strong>
+            {{ docgia.birthday }}
+        </div>
+        <div class="p-1">
+            <strong>Giới tính:</strong>
+            {{ docgia.sex }}
         </div>
         <div class="p-1">
             <strong>Địa chỉ:</strong>
@@ -23,11 +31,6 @@ export default {
         <div class="p-1">
             <strong>Điện thoại:</strong>
             {{ docgia.phone }}
-        </div>
-        <div class="p-1">
-            <strong>Liên hệ yêu thích:&nbsp;</strong>
-            <font-awesome-icon v-if="docgia.favorite" icon="check" />
-            <font-awesome-icon v-else icon="xmark" />
         </div>
     </div>
 </template>

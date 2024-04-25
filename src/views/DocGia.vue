@@ -5,7 +5,7 @@
         </div>
         <div class="mt-3 col-md-6">
             <h4>
-                Danh bạ
+                Đọc giả
                 <i class="fas fa-address-book"></i>
             </h4>
 
@@ -14,7 +14,7 @@
                 :docgias="filteredDocGias"
                 v-model:activeIndex="activeIndex"
             />
-            <p v-else>Không có liên hệ nào.</p>
+            <p v-else>Không có đọc giả nào</p>
 
             <div class="mt-3 row justify-content-around align-items-center">
                 <button class="btn btn-sm btn-primary" @click="refreshList()">
@@ -85,8 +85,8 @@ export default {
     computed: {
         docgiaStrings() {
             return this.docgias.map((docgia) => {
-                const { name, email, address, phone } = docgia;
-                return [name, email, address, phone].join("");
+                const { surname, name, birthday, sex, address, phone } = docgia;
+                return [surname, name, birthday, sex, address, phone].join("");
             });
         },
         filteredDocGias() {

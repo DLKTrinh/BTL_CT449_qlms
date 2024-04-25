@@ -4,6 +4,17 @@
         <Form
             @submit.prevent="addDocGia($data)"
         >
+        <div class="form-group">
+                <label for="surname">Họ lót</label>
+                <input
+                    required
+                    name="surname"
+                    type="text"
+                    class="form-control"
+                    v-model="surname"
+                />
+                <ErrorMessage name="surname" class="error-feedback" />
+            </div>
             <div class="form-group">
                 <label for="name">Tên</label>
                 <input
@@ -16,15 +27,23 @@
                 <ErrorMessage name="name" class="error-feedback" />
             </div>
             <div class="form-group">
-                <label for="email">E-mail</label>
+                <label for="birthday">Ngày sinh</label>
                 <input
-                    required
-                    name="email"
-                    type="email"
+                    name="birthday"
+                    type="date"
                     class="form-control"
-                    v-model="email"
+                    v-model="birthday"
                 />
-                <ErrorMessage name="email" class="error-feedback" />
+                <ErrorMessage name="birthday" class="error-feedback" />
+            </div>
+            <div class="form-group">
+                <label for="sex">Giới tính</label>
+                    <input value="Nam" type="radio" v-model="sex" style="margin: 0px 10px;"> 
+                    <lable style="margin-right: 30px;">Nam</lable>
+                    <input value="Nữ" type="radio" v-model="sex" style="margin: 0px 10px;"> 
+                    <lable style="margin-right: 30px;">Nữ</lable>
+                    <input value="Khác" type="radio" v-model="sex" style="margin: 0px 10px;"> 
+                    <lable>Khác</lable>
             </div>
             <div class="form-group">
                 <label for="address">Địa chỉ</label>
@@ -46,19 +65,8 @@
                 />
                 <ErrorMessage name="phone" class="error-feedback" />
             </div>
-            <div class="form-group form-check">
-                <input
-                    name="favorite"
-                    type="checkbox"
-                    class="form-check-input"
-                    v-model="favorite"
-                />
-                <label for="favorite" class="form-check-label">
-                    <strong>Liên hệ yêu thích</strong>
-                </label>
-            </div>
             <div class="form-group submit">
-                <button class="btn btn-primary"><font-awesome-icon icon="floppy-disk" /> Lưu</button>
+                    <button class="btn btn-primary"><font-awesome-icon icon="floppy-disk" />Lưu</button>
             </div>
         </Form>
     </div>
@@ -70,11 +78,12 @@ import DocGiaService from "../services/docgia.service";
 export default {
     data() {
         return{
+            surname: '',
             name: '',
-            email: '',
+            birthday: '',
+            sex: 'Nam',
             address: '',
             phone: '',
-            favorite: false,
         };
     },
     methods: {
@@ -85,6 +94,7 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+            this.$router.push({ name: "docgia" });
         },
     },
 };
